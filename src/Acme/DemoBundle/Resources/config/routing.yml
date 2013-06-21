@@ -2,6 +2,10 @@ _welcome:
     pattern:  /
     defaults: { _controller: AcmeDemoBundle:Welcome:index }
 
+_debug:
+    resource: "@AcmeDemoBundle/Controller/DebugController.php"
+    type:     annotation
+
 _demo_secured:
     resource: "@AcmeDemoBundle/Controller/SecuredController.php"
     type:     annotation
