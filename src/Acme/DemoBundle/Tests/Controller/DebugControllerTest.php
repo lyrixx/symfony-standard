@@ -2,11 +2,14 @@
 
 namespace Acme\DemoBundle\Tests\Controller;
 
+use Buzz\Browser;
+use Buzz\Client\Curl;
+use Guzzle\Http\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DebugControllerTest extends WebTestCase
 {
-    public function getTests()
+    public function getFormTests()
     {
         return array(
             array('yes', true),
@@ -17,7 +20,7 @@ class DebugControllerTest extends WebTestCase
         );
     }
 
-    /** @dataProvider getTests */
+    /** @dataProvider getFormTests */
     public function testForm($expected, $value)
     {
         $client = static::createClient();
@@ -29,5 +32,34 @@ class DebugControllerTest extends WebTestCase
         ));
 
         $this->assertSame($expected, $client->getResponse()->getContent());
+    }
+
+    public function getFormWithHttpTransportTests()
+    {
+        return array(
+            array('yes', true),
+            array('no', false),
+        );
+    }
+
+    /**
+     * @dataProvider getFormWithHttpTransportTests
+     */
+    public function testFormWithHttpTransport($expected, $value)
+    {
+        $url = 'http://sf-debug-form-false.debug.localhost/app_dev.php/debug';
+        $data = array(
+            'debug' => array(
+                'myCheckbox' => $value,
+            ),
+        );
+
+        $browser = new Browser(new Curl());
+        $response = $browser->submit($url, $data);
+        $this->assertSame($expected, $response->getContent());
+
+        $client = new Client();
+        $request = $client->createRequest('POST', $url, null, $data);
+        $this->assertSame($expected, (string) $request->send()->getBody());
     }
 }
