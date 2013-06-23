@@ -4,14 +4,16 @@ namespace Acme\DemoBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DemoControllerTest extends WebTestCase
+class DebugControllerTest extends WebTestCase
 {
-
     public function getTests()
     {
         return array(
             array('yes', true),
             array('no', false),
+            array('no', 0),
+            array('no', '0'),
+            array('no', ''),
         );
     }
 
