@@ -45,7 +45,7 @@ class DebugControllerTest extends WebTestCase
     /**
      * @dataProvider getFormWithHttpTransportTests
      */
-    public function testFormWithHttpTransport($expected, $value)
+    public function testFormWithHttpTransportWithBuzz($expected, $value)
     {
         $url = 'http://sf-debug-form-false.debug.localhost/app_dev.php/debug';
         $data = array(
@@ -57,6 +57,19 @@ class DebugControllerTest extends WebTestCase
         $browser = new Browser(new Curl());
         $response = $browser->submit($url, $data);
         $this->assertSame($expected, $response->getContent());
+    }
+
+    /**
+     * @dataProvider getFormWithHttpTransportTests
+     */
+    public function testFormWithHttpTransportWithGuzzle($expected, $value)
+    {
+        $url = 'http://sf-debug-form-false.debug.localhost/app_dev.php/debug';
+        $data = array(
+            'debug' => array(
+                'myCheckbox' => $value,
+            ),
+        );
 
         $client = new Client();
         $request = $client->createRequest('POST', $url, null, $data);
