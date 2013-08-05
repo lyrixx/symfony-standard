@@ -1,0 +1,4 @@
+sensio_training:
+    resource: "@SensioTrainingBundle/Controller/"
+    type:     annotation
+    prefix:   /
