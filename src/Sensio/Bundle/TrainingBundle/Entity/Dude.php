@@ -78,6 +78,7 @@ class Dude
      *     cascade={"persist", "remove"}
      *
      * )
+     * @ORM\OrderBy({"id"="ASC"})
      * @Assert\Valid()
      */
     private $addresses;
