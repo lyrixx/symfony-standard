@@ -1,0 +1,23 @@
+<script>
+(function($){
+    $(function() {
+        var $collectionHolder = $('#dude_addresses');
+        $collectionHolder.data('index', $collectionHolder.find('.address').length);
+
+        var prototype = $collectionHolder.data('prototype');
+
+        var $addAddressLink = $('<a href="#">Add an address</a>');
+        $collectionHolder.append($addAddressLink);
+        $addAddressLink.on('click', function(e) {
+            e.preventDefault();
+
+            var index = $collectionHolder.data('index');
+
+            var newForm = prototype.replace(/__name__/g, index);
+            $collectionHolder.append(newForm);
+
+            $collectionHolder.data('index', index + 1);
+        });
+    });
+})(jQuery);
+</script>

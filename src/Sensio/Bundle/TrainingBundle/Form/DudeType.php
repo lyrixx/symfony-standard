@@ -30,6 +30,14 @@ class DudeType extends AbstractType
                 'empty_value' => 'Choose a Language',
                 'preferred_choices' => array('fr', 'es', 'it'),
             ))
+            ->add('addresses', 'collection', array(
+                'type' => new AddressType(),
+                'prototype' => true,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'cascade_validation' => true,
+            ))
             ->add('submit', 'submit', array(
                'label' => 'Add a dude',
             ))

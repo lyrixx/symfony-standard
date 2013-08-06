@@ -9,3 +9,8 @@
     <h1>Add a new dude</h1>
     {{ form(form) }}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ include('@SensioTraining/Dude/_form_address.js.twig')}}
+{% endblock %}

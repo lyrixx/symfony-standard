@@ -2,9 +2,10 @@
 
 namespace Sensio\Bundle\TrainingBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Dude
@@ -69,6 +70,22 @@ class Dude
      * @assert\Language()
      */
     private $language;
+
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="Address",
+     *     mappedBy="dude",
+     *     cascade={"persist", "remove"}
+     *
+     * )
+     * @Assert\Valid()
+     */
+    private $addresses;
+
+    public function __construct()
+    {
+        $this->addresses = new ArrayCollection();
+    }
 
     /**
      * @Assert\True(message="Your password should not contain your name")
@@ -201,5 +218,39 @@ class Dude
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * Add addresses
+     *
+     * @param Address $address
+     * @return Dude
+     */
+    public function addAddresse(Address $address)
+    {
+        $address->setDude($this);
+        $this->addresses[] = $address;
+
+        return $this;
+    }
+
+    /**
+     * Remove address
+     *
+     * @param Address $address
+     */
+    public function removeAddresse(Address $address)
+    {
+        $this->address->removeElement($address);
+    }
+
+    /**
+     * Get addresses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAddresses()
+    {
+        return $this->addresses;
     }
 }
