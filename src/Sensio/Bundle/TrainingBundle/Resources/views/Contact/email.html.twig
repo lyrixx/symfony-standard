@@ -1,0 +1,8 @@
+There is a new contact message
+from <a href="mailto:{{ contact.sender }}">
+{{ contact.sender }}</a>.<br />
+The subject is {{ contact.subject }}.<br />
+<br />
+The message is:<br />
+<br />
+{{ contact.message|striptags|nl2br }}

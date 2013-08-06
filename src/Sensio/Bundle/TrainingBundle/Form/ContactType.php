@@ -17,7 +17,6 @@ class ContactType extends AbstractType
             ->add('sender', 'email', array('required' => false))
             ->add('subject')
             ->add('message', 'textarea')
-            ->add('date', 'date', array('mapped' => false))
             ->add('submit', 'submit')
         ;
     }

@@ -13,6 +13,15 @@
     </head>
     <body>
         {% block breadcrumb '<a >Homepage</a>' %}
+        {% for level in ['success', 'info', 'error', 'warning'] %}
+            {% for message in app.session.flashbag.get(level) %}
+                <div class="fade in alert alert-{{ level }}"
+                    <a class="close" href="#">×</a>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
