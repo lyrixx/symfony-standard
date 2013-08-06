@@ -1,0 +1,42 @@
+{% extends '@SensioTraining/Dude/layout.html.twig' %}
+
+{% block breadcrumb %}
+    {{ parent ()}}
+    <li class="active">List</li>
+{% endblock %}
+
+{% block body %}
+    <h1>Dudes list</h1>
+
+    {% if dudes %}
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Country</th>
+                <th>Language</th>
+                <th>Actions</th>
+            </tr>
+            {% for dude in dudes %}
+                <tr>
+                    <td>{{ dude.name }}</td>
+                    <td>{{ dude.email }}</td>
+                    <td>{{ dude.country }}</td>
+                    <td>{{ dude.language }}</td>
+                    <td>
+                        <ul class="unstyled">
+                            <li><a href="#"><i class="icon-search"></i> Show</a></li>
+                            <li><a href="{{ path('dude_edit', { id: dude.id }) }}"><i class="icon-pencil"></i> Edit</a></li>
+                            <li><a href="#"><i class="icon-eject"></i> Delete</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    {% else %}
+        There is no dude for the moment, but you can
+    {% endif %}
+
+    <a href="{{ path('dude_new')  }}" class="btn btn-primary">Add a new one</a>
+{% endblock %}

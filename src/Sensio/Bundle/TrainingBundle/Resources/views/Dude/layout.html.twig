@@ -1,0 +1,6 @@
+{% extends 'base.html.twig' %}
+
+{% block breadcrumb %}
+    {{ parent ()}}
+    <li><a href="{{ path('dude_list') }}">Dudes</a> <span class="divider">/</span></li>
+{% endblock %}

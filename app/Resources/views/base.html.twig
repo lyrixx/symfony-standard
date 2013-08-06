@@ -12,17 +12,27 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block breadcrumb '<a >Homepage</a>' %}
-        {% for level in ['success', 'info', 'error', 'warning'] %}
-            {% for message in app.session.flashbag.get(level) %}
-                <div class="fade in alert alert-{{ level }}"
-                    <a class="close" href="#">×</a>
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
+        <div class="container">
 
-        {% block body %}{% endblock %}
+            <ul class="breadcrumb">
+                {% block breadcrumb %}
+                    <li><a href="#">Home</a> <span class="divider">/</span></li>
+                {% endblock%}
+            </ul>
+
+
+            {% for level in ['success', 'info', 'error', 'warning'] %}
+                {% for message in app.session.flashbag.get(level) %}
+                    <div class="fade in alert alert-{{ level }}"
+                        <a class="close" href="#">×</a>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+            {% block body %}{% endblock %}
+
+        </div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

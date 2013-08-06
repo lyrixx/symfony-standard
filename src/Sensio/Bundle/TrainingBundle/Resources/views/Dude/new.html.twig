@@ -1,0 +1,11 @@
+{% extends '@SensioTraining/Dude/layout.html.twig' %}
+
+{% block breadcrumb %}
+    {{ parent ()}}
+    <li class="active">Add</li>
+{% endblock %}
+
+{% block body %}
+    <h1>Add a new dude</h1>
+    {{ form(form) }}
+{% endblock %}
