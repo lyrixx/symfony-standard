@@ -28,7 +28,10 @@ class DudeController extends Controller
             ->findAll()
         ;
 
-        return array('dudes' => $dudes);
+        return array(
+            'dudes' => $dudes,
+            'token' => $this->get('form.csrf_provider')->generateCsrfToken('dude_delete'),
+        );
     }
 
     /**
@@ -77,5 +80,29 @@ class DudeController extends Controller
         }
 
         return array('form' => $form->createView(), 'dude' => $dude);
+    }
+
+    /**
+     * @Route("/delete/{id}/{token}", name="dude_delete")
+     */
+    public function deleteAction(Request $request, $id, $token)
+    {
+        if (!$this->get('form.csrf_provider')->isCsrfTokenValid('dude_delete', $token)) {
+            throw $this->createNotFoundException('Token no valid');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $dude = $em->getRepository('SensioTrainingBundle:Dude')->find($id);
+
+        if (!$dude) {
+            throw $this->createNotFoundException('Dude does not exist');
+        }
+
+        $em->remove($dude);
+        $em->flush();
+
+        $request->getSession()->getFlashBag()->add('success', 'The dude has been removed');
+
+        return $this->redirect($this->generateUrl('dude_list'));
     }
 }
