@@ -143,7 +143,6 @@
         </label>
     {% else %}
         {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' control-label')|trim}) %}
-        {% if required %}*{% endif %}
         {{ parent() }}
     {% endif %}
 {% endspaceless %}
