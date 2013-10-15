@@ -5,7 +5,7 @@ namespace Sensio\Bundle\TrainingBundle\Mail;
 use Sensio\Bundle\TrainingBundle\Contact\Contact;
 use Symfony\Bundle\TwigBundle\TwigEngine;
 
-class Mail
+class Mailer
 {
     private $mailer;
     private $twig;
