@@ -1,17 +1,14 @@
-{% block _dude_addresses_widget %}
-    {% if prototype is defined %}
-        {% set attr = attr|merge({'data-prototype': form_widget(prototype) }) %}
-    {% endif %}
-    <div {{ block('widget_container_attributes') }}>
-        {% for child in form %}
-            {{ form_widget(child) }}
-        {% endfor %}
-    </div>
+{% block addresses_errors %}
+
+{% endblock %}
+
+{% block address_row %}
+    {{ form_widget(form) }}
 {% endblock %}
 
 {% block address_widget %}
     <fieldset>
-        <legend>Address {% if form.vars.value %}#{{ form.vars.value.id }}{% else %}(new){% endif %}:</legend>
+        <legend>Address {% if form.vars.value and form.vars.value.id %}#{{ form.vars.value.id }}{% else %}(new){% endif %}:</legend>
         {{ form_widget(form) }}
     </fieldset>
 {% endblock %}

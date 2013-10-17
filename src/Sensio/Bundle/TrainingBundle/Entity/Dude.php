@@ -206,7 +206,10 @@ class Dude
      */
     public function setPassword($password)
     {
-        $this->password = $password;
+        // Do not erase old password is the new one is empty
+        if ($password) {
+            $this->password = $password;
+        }
 
         return $this;
     }

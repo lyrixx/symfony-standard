@@ -30,44 +30,29 @@ class DudeType extends AbstractType
                 'empty_value' => 'Choose a Language',
                 'preferred_choices' => array('fr', 'es', 'it'),
             ))
+            ->add('agreements', 'checkbox', array(
+                'mapped' => false,
+                'constraints' => array(
+                    new Assert\True(array(
+                        'message' => 'You must agree the TOS',
+                    )),
+                ),
+                'label' => 'I agree the TOS',
+            ))
             ->add('addresses', 'collection', array(
                 'type' => new AddressType(),
-                'prototype' => true,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'cascade_validation' => true,
             ))
             ->add('submit', 'submit', array(
                'label' => 'Add a dude',
             ))
-            ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
-                $dude = $event->getData();
-                $form = $event->getForm();
-                if ($dude->getId()) {
+            ->addEventListener(FormEvents::POST_SET_DATA, function(FormEvent $event) {
+                if (!$event->getData()->getId()) {
                     return;
                 }
-                $form
-                    ->add('agreements', 'checkbox', array(
-                        'mapped' => false,
-                        'constraints' => array(
-                            new Assert\True(array(
-                                'message' => 'You must agree the TOS',
-                            )),
-                        ),
-                        'label' => 'I agree the TOS',
-                    ))
-                ;
-            })
-            ->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event) {
-                $newDude = $event->getData();
-
-                if (!$newDude['password']['first'] && !$newDude['password']['second']) {
-                    $initialDude = $event->getForm()->getConfig()->getData();
-                    $newDude['password']['first'] = $initialDude->getPassword();
-                    $newDude['password']['second'] = $initialDude->getPassword();
-                    $event->setData($newDude);
-                }
+                $event->getForm()->remove('agreements');
             })
         ;
     }
