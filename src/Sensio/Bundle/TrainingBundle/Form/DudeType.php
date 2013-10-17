@@ -56,6 +56,22 @@ class DudeType extends AbstractType
                 $form->remove('agreements');
                 $form->add('submit', 'submit', array('label' => 'Edit the dude'));
             })
+
+            ->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event) {
+                $dude = $event->getData();
+                if (!isset($dude['addresses'])) {
+                    return;
+                }
+                foreach ($dude['addresses'] as $key => $address) {
+                    foreach ($address as $value) {
+                        if ($value) {
+                            continue 2;
+                        }
+                    }
+                    unset($dude['addresses'][$key]);
+                }
+                $event->setData($dude);
+            })
         ;
     }
 
