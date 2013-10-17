@@ -1,4 +1,10 @@
-sensio_training:
+_sensio_training:
     resource: "@SensioTrainingBundle/Controller/"
     type:     annotation
     prefix:   /
+
+homepage:
+    path: /
+    defaults:
+        _controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
+        route: dude_list
