@@ -18,6 +18,11 @@
 
             $collectionHolder.data('index', index + 1);
         });
+        $('.address-delete').on('click', function(e) {
+            e.preventDefault();
+
+            $(this).parents('fieldset').remove();
+        });
     });
 })(jQuery);
 </script>

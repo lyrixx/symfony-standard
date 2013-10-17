@@ -75,7 +75,8 @@ class Dude
      * @ORM\OneToMany(
      *     targetEntity="Address",
      *     mappedBy="dude",
-     *     cascade={"persist", "remove"}
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=true
      *
      * )
      * @ORM\OrderBy({"id"="ASC"})
@@ -245,7 +246,8 @@ class Dude
      */
     public function removeAddress(Address $address)
     {
-        $this->address->removeElement($address);
+        $address->setDude(null);
+        $this->addresses->removeElement($address);
     }
 
     /**
