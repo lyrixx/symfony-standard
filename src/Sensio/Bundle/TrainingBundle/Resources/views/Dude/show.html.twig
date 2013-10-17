@@ -1,0 +1,36 @@
+{% extends '@SensioTraining/Dude/layout.html.twig' %}
+
+{% block breadcrumb %}
+    {{ parent ()}}
+    <li class="active">Show #{{ dude.id }}</li>
+{% endblock %}
+
+{% block body %}
+    <h1>Show #{{ dude.id }}</h1>
+
+    <ul class="unstyled">
+        <li><strong>Name</strong>: {{ dude.name }}</li>
+        <li><strong>Email</strong>: {{ dude.email }}</li>
+        <li><strong>Country</strong>: {{ dude.country }}</li>
+        <li><strong>Language</strong>: {{ dude.language }}</li>
+        <li>
+            <strong>Addresses</strong>:
+            <ul class="unstyled">
+                {% for address in dude.addresses %}
+                    <li>
+                        <address>
+                            {{ address.street }}, {{ address.zipcode }}, {{ address.city }}, {{ address.country }}
+                        </address>
+                    </li>
+                {% else %}
+                    <li>This dude have no address</li>
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+    <div class="form-actions">
+        <a class="btn btn-danger" href="{{ path('dude_delete', { id: dude.id, token: token }) }}"><i class="icon-eject"></i> Delete the dude</a>
+        <a class="btn btn-primary" href="{{ path('dude_edit', { id: dude.id }) }}"><i class="icon-pencil"></i> Edit the dude</a>
+        <a class="btn btn-info" href="{{ path('dude_list') }}"><i class="icon-list"></i> Return to the list</a>
+    </div>
+{% endblock %}

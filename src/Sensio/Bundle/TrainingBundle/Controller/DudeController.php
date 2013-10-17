@@ -33,6 +33,7 @@ class DudeController extends Controller
         );
     }
 
+
     /**
      * @Route("/new", name="dude_new")
      */
@@ -51,6 +52,17 @@ class DudeController extends Controller
         }
 
         return array('form' => $form->createView());
+    }
+
+    /**
+     * @Route("/{id}", name="dude_show")
+     */
+    public function showAction(Request $request, Dude $dude)
+    {
+        return array(
+            'dude' => $dude,
+            'token' => $this->get('form.csrf_provider')->generateCsrfToken('dude_delete'),
+        );
     }
 
     /**
