@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class DudeController extends Controller
 {
-
     /**
      * @Route("", name="dude_list")
      */
@@ -57,19 +56,8 @@ class DudeController extends Controller
     /**
      * @Route("/edit/{id}", name="dude_edit")
      */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, Dude $dude)
     {
-        $dude = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('SensioTrainingBundle:Dude')
-            ->find($id)
-        ;
-
-        if (!$dude) {
-            throw $this->createNotFoundException('There is no dude with this id.');
-        }
-
         $form = $this->createForm(new DudeType(), $dude);
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
@@ -85,19 +73,13 @@ class DudeController extends Controller
     /**
      * @Route("/delete/{id}/{token}", name="dude_delete")
      */
-    public function deleteAction(Request $request, $id, $token)
+    public function deleteAction(Request $request, Dude $dude, $token)
     {
         if (!$this->get('form.csrf_provider')->isCsrfTokenValid('dude_delete', $token)) {
             throw $this->createNotFoundException('Token no valid');
         }
 
         $em = $this->getDoctrine()->getManager();
-        $dude = $em->getRepository('SensioTrainingBundle:Dude')->find($id);
-
-        if (!$dude) {
-            throw $this->createNotFoundException('Dude does not exist');
-        }
-
         $em->remove($dude);
         $em->flush();
 
