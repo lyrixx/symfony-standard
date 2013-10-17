@@ -14,7 +14,7 @@
             var index = $collectionHolder.data('index');
 
             var newForm = prototype.replace(/__name__/g, index);
-            $collectionHolder.append(newForm);
+            $addAddressLink.before(newForm);
 
             $collectionHolder.data('index', index + 1);
         });

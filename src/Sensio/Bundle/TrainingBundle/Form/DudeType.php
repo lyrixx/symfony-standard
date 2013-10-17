@@ -45,14 +45,16 @@ class DudeType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
             ))
-            ->add('submit', 'submit', array(
-               'label' => 'Add a dude',
-            ))
+
             ->addEventListener(FormEvents::POST_SET_DATA, function(FormEvent $event) {
+                $form = $event->getForm();
                 if (!$event->getData()->getId()) {
+                    $form->add('submit', 'submit', array('label' => 'Add a dude'));
+
                     return;
                 }
-                $event->getForm()->remove('agreements');
+                $form->remove('agreements');
+                $form->add('submit', 'submit', array('label' => 'Edit the dude'));
             })
         ;
     }
