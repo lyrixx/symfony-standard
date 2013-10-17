@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="sensio_training.form_type.dude" class="Sensio\Bundle\TrainingBundle\Form\DudeType">
+            <tag name="form.type" alias="dude"></tag>
+        </service>
+
+        <service id="sensio_training.form_type.address" class="Sensio\Bundle\TrainingBundle\Form\AddressType">
+            <tag name="form.type" alias="address"></tag>
+        </service>
+    </services>
+
+</container>

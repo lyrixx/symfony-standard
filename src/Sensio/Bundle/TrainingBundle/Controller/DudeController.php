@@ -5,7 +5,6 @@ namespace Sensio\Bundle\TrainingBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\TrainingBundle\Entity\Dude;
-use Sensio\Bundle\TrainingBundle\Form\DudeType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -40,7 +39,7 @@ class DudeController extends Controller
     public function newAction(Request $request)
     {
         $dude = new Dude();
-        $form = $this->createForm(new DudeType(), $dude);
+        $form = $this->createForm('dude', $dude);
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -70,7 +69,7 @@ class DudeController extends Controller
      */
     public function editAction(Request $request, Dude $dude)
     {
-        $form = $this->createForm(new DudeType(), $dude);
+        $form = $this->createForm('dude', $dude);
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $this->getDoctrine()->getManager()->flush();

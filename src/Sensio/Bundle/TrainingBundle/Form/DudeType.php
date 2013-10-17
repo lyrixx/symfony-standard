@@ -40,7 +40,7 @@ class DudeType extends AbstractType
                 'label' => 'I agree the TOS',
             ))
             ->add('addresses', 'collection', array(
-                'type' => new AddressType(),
+                'type' => 'address',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
