@@ -14,7 +14,10 @@ class AddressType extends AbstractType
             ->add('street')
             ->add('zipcode')
             ->add('city')
-            ->add('country', 'country')
+            ->add('country', 'country', array(
+                'empty_value' => 'Select a country',
+                'preferred_choices' => array('FR', 'EN', 'ES'),
+            ))
         ;
     }
 
