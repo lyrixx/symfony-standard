@@ -89,7 +89,7 @@ class Dude
     }
 
     /**
-     * @Assert\True(message="Your password should not contain your name")
+     * @Assert\True(message="Your password should not contain your name.")
      */
     public function isPasswordValid()
     {
@@ -227,7 +227,7 @@ class Dude
      * @param Address $address
      * @return Dude
      */
-    public function addAddresse(Address $address)
+    public function addAddress(Address $address)
     {
         $address->setDude($this);
         $this->addresses[] = $address;
@@ -240,7 +240,7 @@ class Dude
      *
      * @param Address $address
      */
-    public function removeAddresse(Address $address)
+    public function removeAddress(Address $address)
     {
         $this->address->removeElement($address);
     }
