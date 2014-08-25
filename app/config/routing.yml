@@ -1,0 +1,5 @@
+acme_debug:
+    resource: "@AcmeDebugBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
