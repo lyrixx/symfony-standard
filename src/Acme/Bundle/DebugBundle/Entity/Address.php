@@ -5,16 +5,12 @@ namespace Acme\Bundle\DebugBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Address
- *
  * @ORM\Table()
  * @ORM\Entity
  */
 class Address
 {
     /**
-     * @var integer
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -22,12 +18,22 @@ class Address
     private $id;
 
     /**
-     * Get id
-     *
-     * @return integer
+     * @ORM\OneToOne(targetEntity="Dude")
      */
+    private $dude;
+
+    public function __construct($dude)
+    {
+        $this->dude = $dude;
+    }
+
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getDude()
+    {
+        return $this->dude;
     }
 }
