@@ -21,6 +21,7 @@ class FooType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => Foo::class,
+            'empty_data' => new Foo(),
         ));
     }
 
