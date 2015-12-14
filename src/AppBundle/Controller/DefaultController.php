@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\DTO\Email;
 use AppBundle\Form\Type\EmailType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,7 +15,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $form = $this->createForm(EmailType::class);
+        $form = $this->createForm(EmailType::class, new Email());
 
         return $this->render('default/index.html.twig', [
             'form' => $form->createView(),
