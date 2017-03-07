@@ -18,6 +18,10 @@ monolog:
             path: '%kernel.logs_dir%/%kernel.environment%.log'
             level: debug
             channels: ['!event']
+        server_log:
+            type: server_log
+            host: 0:9911
+            process_psr_3_messages: false
         console:
             type:   console
             process_psr_3_messages: false
