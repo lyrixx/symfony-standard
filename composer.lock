@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d69911d7b6f02630aae56067b441dd54",
+    "content-hash": "10fd677c81d96d297dfc2996263f2984",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -1276,6 +1276,68 @@
             "time": "2017-03-21T23:34:44+00:00"
         },
         {
+            "name": "sensiolabs/amqp",
+            "version": "dev-prepare-open-source",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:sensiolabs/amqp.git",
+                "reference": "434e1b36660b7de8d845414b0cc4f099c0c8c3c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sensiolabs/amqp/zipball/434e1b36660b7de8d845414b0cc4f099c0c8c3c5",
+                "reference": "434e1b36660b7de8d845414b0cc4f099c0c8c3c5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "psr/log": "~1.0",
+                "symfony/event-dispatcher": "^2.3|^3.0"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\": "src/Symfony/Component/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Grégoire Pineau",
+                    "email": "lyrixx@lyrixx.info"
+                }
+            ],
+            "description": "Library to dialog with AMQP",
+            "homepage": "http://symfony.com",
+            "keywords": [
+                "amqp",
+                "consumer",
+                "producer",
+                "queue",
+                "rabbitmq",
+                "worker"
+            ],
+            "support": {
+                "source": "https://github.com/sensiolabs/amqp/tree/prepare-open-source",
+                "issues": "https://github.com/sensiolabs/amqp/issues"
+            },
+            "time": "2017-04-12 16:17:18"
+        },
+        {
             "name": "sensiolabs/security-checker",
             "version": "v4.0.4",
             "source": {
@@ -2157,14 +2219,13 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "sensiolabs/amqp": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=5.5.9"
     },
-    "platform-dev": [],
-    "platform-overrides": {
-        "php": "5.5.9"
-    }
+    "platform-dev": []
 }
