@@ -1,0 +1,11 @@
+framework:
+    worker:
+        fetchers:
+            services:
+                configurable_fetcher:
+                    service: app.configurable_amqp_message_fetcher
+
+        workers:
+            configurable_worker:
+                fetcher: configurable_fetcher
+                consumer: app.configurable_consumer

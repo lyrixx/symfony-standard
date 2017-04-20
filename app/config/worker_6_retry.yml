@@ -1,0 +1,10 @@
+framework:
+    worker:
+        fetchers:
+            amqps:
+                queue_u_1: ~
+
+        workers:
+            queue_u_1_consumer:
+                fetcher: queue_u_1
+                consumer: app.dump_consumer

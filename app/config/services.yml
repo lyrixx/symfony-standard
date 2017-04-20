@@ -7,3 +7,20 @@ services:
     #service_name:
     #    class: AppBundle\Directory\ClassName
     #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
+    app.dump_consumer:
+        class: AppBundle\Consumer\DumpConsumer
+        arguments:
+            - "@amqp.broker"
+
+    app.configurable_consumer:
+        class: AppBundle\Consumer\ConfigurableConsumer
+        arguments:
+            - "@amqp.broker"
+            - "@logger"
+
+    app.configurable_amqp_message_fetcher:
+        class: AppBundle\Worker\MessageFetcher\AmqpMessageFetcher
+        arguments:
+            - "@amqp.broker"
+            - "default_queue"
+

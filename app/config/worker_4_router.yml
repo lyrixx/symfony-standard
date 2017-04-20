@@ -1,0 +1,15 @@
+framework:
+    worker:
+        fetchers:
+            amqps:
+                queue_d: ~
+
+        routers:
+            directs:
+                queue_d:
+                    # fetcher: queue_d # optional
+                    consumer: app.dump_consumer
+
+        workers:
+            queue_d_consumer:
+                router: queue_d

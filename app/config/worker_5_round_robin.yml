@@ -1,0 +1,24 @@
+framework:
+    worker:
+        fetchers:
+            amqps:
+                queue_e: ~
+                queue_d: ~
+                queue_f: ~
+
+        routers:
+            directs:
+                queue_d:
+                    consumer: app.dump_consumer
+                queue_e:
+                    consumer: app.dump_consumer
+                queue_f:
+                    consumer: app.dump_consumer
+            round_robins:
+                queue_round_robin:
+                    group: [queue_d, queue_e, queue_f]
+                    consume_everything: false
+
+        workers:
+            queue_round_robin:
+                router: queue_round_robin

@@ -1,0 +1,87 @@
+framework:
+    worker:
+        cli_title_prefix: app
+    amqp:
+        connections:
+            default:
+                url: amqp://guest:guest@rabbitmq-3.lxc:5672/symfony_demo
+                exchanges:
+                    - name: my_fanout
+                      arguments:
+                          type: fanout
+                    - name: my_topic
+                      arguments:
+                          type: topic
+                    - name: my_direct
+
+                queues:
+                    # simple queue
+                    - name: simple
+
+                    # queue with many bindings
+                    - name: many_bindings
+                      arguments:
+                          routing_keys:
+                            - many_bindings_1
+                            - many_bindings_2
+                            - many_bindings_3
+                            - many_bindings_4
+                            - many_bindings_5
+
+                    # simple queue + exponential retry
+                    - name: retry_strategy_exponential
+                      retry_strategy: exponential
+                      retry_strategy_options: { offset: 1, max: 3 }
+
+                    # queue with custom routing + constant retry
+                    - name: retry_strategy_constant_1
+                      retry_strategy: constant
+                      retry_strategy_options: { time: 2, max: 3 }
+                      arguments:
+                          routing_keys: retry_strategy_constant
+                    - name: retry_strategy_constant_2
+                      retry_strategy: constant
+                      retry_strategy_options: { time: 2, max: 3 }
+                      arguments:
+                          routing_keys: retry_strategy_constant
+
+                    #  Queue bound on a fanout exchange
+                    - name: fanout_1
+                      arguments:
+                          exchange: my_fanout
+                    - name: fanout_2
+                      arguments:
+                          routing_keys: null
+                          exchange: my_fanout
+                    - name: fanout_3
+                      arguments:
+                          routing_keys: [useless, also_useless]
+                          exchange: my_fanout
+                    - name: fanout_4  # As the routing key === false, this queue will not be bound to the exchange
+                      arguments:
+                          routing_keys: false
+                          exchange: my_fanout
+
+                    # Queue bound on a topic exchange
+                    - name: topic_all
+                      arguments:
+                          routing_keys: "#"
+                          exchange: my_topic
+                    - name: topic_twitter
+                      retry_strategy: constant
+                      retry_strategy_options: { time: 2, max: 3 }
+                      arguments:
+                          routing_keys: "twitter.*"
+                          exchange: my_topic
+
+                    # queue with a custom header
+                    - name: custom_ttl
+                      arguments:
+                          x-message-ttl: 10000
+
+                    # queue bound a another exchange
+                    - name: another_exchange
+                      retry_strategy: constant
+                      retry_strategy_options: { time: 2, max: 3 }
+                      arguments:
+                          exchange: my_direct

@@ -1,0 +1,18 @@
+framework:
+    worker:
+        fetchers:
+            amqps:
+                queue_c: ~
+            buffers:
+                queue_c_buffer:
+                    wrap: queue_c
+                    max_messages: 3
+                    max_buffurisation_time: 5
+
+        workers:
+            queue_c_consumer:
+                fetcher: queue_c
+                consumer: app.dump_consumer
+            queue_c_buffer_consumer:
+                fetcher: queue_c_buffer
+                consumer: app.dump_consumer

@@ -1,0 +1,14 @@
+framework:
+    worker:
+        fetchers:
+            amqps:
+                # full configuration
+                fetcher_queue_b:
+                    name: fetcher_queue_b
+                    queue_name: queue_b
+                    auto_ack: false
+
+        workers:
+            queue_b_consumer:
+                fetcher: fetcher_queue_b
+                consumer: app.dump_consumer

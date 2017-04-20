@@ -2,6 +2,14 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: amqp.yml }
+    - { resource: worker_1_most_simple.yml }
+    - { resource: worker_2_simple.yml }
+    - { resource: worker_3_buffer.yml }
+    - { resource: worker_4_router.yml }
+    - { resource: worker_5_round_robin.yml }
+    - { resource: worker_6_retry.yml }
+    - { resource: worker_7_service.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -23,7 +31,6 @@ framework:
         engines: ['twig']
     default_locale: '%locale%'
     trusted_hosts: ~
-    trusted_proxies: ~
     session:
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
         handler_id:  session.handler.native_file

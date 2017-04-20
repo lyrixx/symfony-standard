@@ -1,0 +1,12 @@
+framework:
+    worker:
+        fetchers:
+            amqps:
+                # most simple fetcher, will listen on queue_a
+                queue_a:
+                    # name: queue_a1
+                    # queue_name: foobar
+        workers:
+            queue_a_consumer:
+                fetcher: queue_a
+                consumer: app.dump_consumer
