@@ -1,10 +1,20 @@
 <?php
 
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
 {
+    public function __construct($environment, $debug)
+    {
+        $dotenv = new Dotenv();
+        $dotenv->load(__DIR__.'/../.env');
+
+        parent::__construct($environment, $debug);
+    }
+
+
     public function registerBundles()
     {
         $bundles = [
